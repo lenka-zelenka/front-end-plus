@@ -6,6 +6,6 @@ list = [
     data.load('GET', 'https://api.github.com/orgs/hillel-front-end/repos')
 ]
 
-data.runAsyncAll(list, true).then((item) => {
+data.runAsyncAll(list, false).then((item) => {
     render.renderData(item)
 });

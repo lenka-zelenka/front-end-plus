@@ -18,13 +18,33 @@ function load(method, path) {
     })
 }
 
-async function runAsyncAll(list, async) {
+// async function runAsyncAll(list, async) {
 
-    let data = [];
-    if (async) {
-        list.forEach(async (element) => {
-            data.push(await element)
-        });
-    }
-    return data;
+//     let data = [];
+//     if (async) {
+//         list.forEach(async (element) => {
+//             data.push(await element)
+//         });
+//     }
+//     console.log(data[0])
+//     return data;
+// }
+
+async function runAsyncAll(list, async) {
+    return [
+        await list[0],
+        await list[1],
+    ];
 }
+
+// async function runAsyncAll(list, async) {
+
+//     if (!async) {
+//         let res = []
+//         for (let i of list) {
+//             res.push(await i())
+//         }
+//         return res
+//     }
+//     return Promise.all(list.map(item => item))
+// }
