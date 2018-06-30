@@ -1,12 +1,11 @@
 var render = require('./renderService.js');
 var data = require('./dataService.js');
 
-var repos = [];
-data.load()
-    .then(response => response.map((item) => doAjax('GET', item.forks_url)))
-    .then(list => Promise.all(list))
-    .then(all => render.renderData(all));
+list = [
+    data.load('GET', 'https://api.github.com/orgs/hillel-front-end'),
+    data.load('GET', 'https://api.github.com/orgs/hillel-front-end/repos')
+]
 
-// Promise.all(load).then(function(values){
-//     console.log('values')
-// })
+data.runAsyncAll(list, true).then((item) => {
+    render.renderData(item)
+});

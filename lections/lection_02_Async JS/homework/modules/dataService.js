@@ -1,6 +1,6 @@
 var repos = [];
 
-function doAjax(method, path) {
+function load(method, path) {
     var xhr = new XMLHttpRequest();
 
     xhr.open(method, path, true);
@@ -17,11 +17,14 @@ function doAjax(method, path) {
         }
     })
 }
-function load() {
-    return doAjax('GET', 'https://api.github.com/orgs/hillel-front-end/repos')
-        
+
+async function runAsyncAll(list, async) {
+
+    let data = [];
+    if (async) {
+        list.forEach(async (element) => {
+            data.push(await element)
+        });
+    }
+    return data;
 }
-
-// function executeRepos() {
-
-// }
