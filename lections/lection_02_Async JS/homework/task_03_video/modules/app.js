@@ -1,4 +1,4 @@
-var youtube = require('./youtubr-api.js');
+var youtube = require('./youtube-api');
 
 var addvideo = document.getElementById('add-video');
 
@@ -10,6 +10,6 @@ function getVideoId() {
 }
 
 function addVideo(videoId) {
-    
+
     youtube.onYouTubeIframeAPIReady(videoId)
 }
