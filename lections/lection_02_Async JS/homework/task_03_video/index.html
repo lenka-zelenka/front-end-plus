@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js" async></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <form action="">
+                <div class="col s12 m10">
+                    <input type="text" name="search-video" id="search-video">
+                </div>
+                <div class="col s12 m2">
+                    <a id="add-video" class="btn">Add to list</a>
+                </div>
+            </form>
+        </div>
+
+        <div id="player"></div>
+
+        <div id="video-list" class="row">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/sl_pxCAcJz4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script>
+        System.config({
+            meta: {
+                format: 'cjs'
+            }
+        });
+        System.import('modules/app.js');
+    </script>
+</body>
+
+</html>
