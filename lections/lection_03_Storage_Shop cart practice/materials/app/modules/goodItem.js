@@ -18,15 +18,8 @@ function renderGood(data) {
     `;
 }
 function addToCart(event) {
-    itemId = event.target.dataset.id;
-    // selectedGood = model.goods[itemId];
-    data.setLocalGoods(itemId);
-    // localStorage.setItem('goods', JSON.stringify(data));
-
-    // InitGoodsCart(selectedGood)
+    data.setLocalGoods(event.target.dataset.id);
 }
-
-
 
 window.handlers = {
     addToCart

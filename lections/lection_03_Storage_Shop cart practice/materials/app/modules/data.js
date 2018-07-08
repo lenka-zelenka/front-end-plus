@@ -68,8 +68,8 @@ function setLocalGoods(itemId) {
     if (localStorage.goods) {
         data = getLocalGoods();
     }
-    console.log(data.length == 0 || data.some(element => element.id != itemId))
-    if (data.length == 0 || data.some(element => element.id != itemId)) {
+
+    if (data.length == 0 || data.every(element => element.id != itemId)) {
         model.goods.some((element) => {
             if (element.id == itemId) {
                 data.push(element);
