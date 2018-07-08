@@ -5,17 +5,20 @@
             {
                 "id": "001",
                 "title": "",
-                "price": 100
+                "price": 100,
+                "img": "https://img.tsn.ua/cached/1448032823/tsn-e7757395fe937525edc97f670924f9cf/thumbs/1200x630/68/dd/bc7b14f35f677b3c6aa6c383516add68.jpg"
             },
             {
                 "id": "002",
                 "title": "",
-                "price": 300
+                "price": 300,
+                "img": "http://bipbap.ru/wp-content/uploads/2017/12/65620375-6b2b57fa5c7189ba4e3841d592bd5fc1-800-640x426.jpg"
             },
             {
                 "id": "003",
                 "title": "",
-                "price": 200
+                "price": 200,
+                "img": "https://www.meme-arsenal.com/memes/876041c5669352bb985e3a11eda018b7.jpg"
             }
         ]
     }
