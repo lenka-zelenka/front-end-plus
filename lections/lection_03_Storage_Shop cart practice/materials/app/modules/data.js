@@ -26,7 +26,6 @@ function load() {
     return doAjax('GET', 'http://localhost:3780/goods')
         .then(function (response) {
             model.goods = response.goods;
-
             return response;
         })
 

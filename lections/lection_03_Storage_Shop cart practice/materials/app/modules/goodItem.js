@@ -6,7 +6,7 @@
 
 function renderGood(data) {
     // create the html for the goods items
-    return  `
+    return `
             <div class="card" id="${data.id}">
                 <div class="card-image">
                     <img src="${data.img}">
@@ -23,10 +23,31 @@ function renderGood(data) {
 }
 function addToCart(event) {
     itemId = event.target.dataset.id;
-    // console.log(itemId)
-    // selectedGood = model.goods[itemId];
-    // setLocalGoods(selectedGood);
+    selectedGood = model.goods[itemId];
+    setLocalGoods(selectedGood);
+    // localStorage.setItem('goods', JSON.stringify(data));
+
     // InitGoodsCart(selectedGood)
+}
+
+function setLocalGoods(item){
+    var data = {};
+    if (localStorage.goods) {
+        data = getLocalGoods();
+    }
+
+    if (!data[item.id]) {
+        data[item.id] = item;
+        data[item.id].quantity = 1;
+    }
+    else {
+        data[item.id].quantity++;
+    }
+
+    localStorage.setItem('goods', JSON.stringify(data));
+}
+function getLocalGoods() {
+    return JSON.parse(localStorage.goods);
 }
 
 window.handlers = {
