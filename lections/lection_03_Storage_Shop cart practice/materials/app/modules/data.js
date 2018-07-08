@@ -25,45 +25,69 @@ function doAjax(method, path) {
 function load() {
     return doAjax('GET', 'http://localhost:3780/goods')
         .then(function (response) {
-            model.goods = response.goods;
+            model.goods = response.data.list;
             return response;
         })
 
 }
 
-function sortBy(way) {
-    var sortedNames = []
+// function sortBy(way) {
+//     var sortedNames = []
 
-    for (key in model.goods) {
-        sortedNames.push(model.goods[key]);
-    }
+//     for (key in model.goods) {
+//         sortedNames.push(model.goods[key]);
+//     }
 
-    if (way === 'price') {
-        sortedNames.sort(comparePrice)
-    } else if (way === 'name') {
-        sortedNames.sort(compareTitle)
-    }
+//     if (way === 'price') {
+//         sortedNames.sort(comparePrice)
+//     } else if (way === 'name') {
+//         sortedNames.sort(compareTitle)
+//     }
 
-    for (var i = 0; i <= sortedNames.length - 1; i++) {
-        model.goods['item-' + (i + 1)] = sortedNames[i]
-    }
-    return model;
-}
+//     for (var i = 0; i <= sortedNames.length - 1; i++) {
+//         model.goods['item-' + (i + 1)] = sortedNames[i]
+//     }
+//     return model;
+// }
 
-function comparePrice(a, b) {
-    return a.price - b.price;
-}
+// function comparePrice(a, b) {
+//     return a.price - b.price;
+// }
 
-function compareTitle(a, b) {
-    return a.title.localeCompare(b.title);
-}
+// function compareTitle(a, b) {
+//     return a.title.localeCompare(b.title);
+// }
 function $getModel() {
     return model;
 }
 
 
+function setLocalGoods(itemId) {
+    var data = [];
+
+    if (localStorage.goods) {
+        data = getLocalGoods();
+    }
+    console.log(data.length == 0 || data.some(element => element.id != itemId))
+    if (data.length == 0 || data.some(element => element.id != itemId)) {
+        model.goods.some((element) => {
+            if (element.id == itemId) {
+                data.push(element);
+            }
+        });
+    }
+
+    localStorage.setItem('goods', JSON.stringify(data));
+}
+
+function getLocalGoods() {
+    return JSON.parse(localStorage.goods);
+}
+
 module.exports = {
     load,
-    sortBy,
-    $getModel
+    // sortBy,
+    // $getModel,
+    setLocalGoods,
+    getLocalGoods
 };
