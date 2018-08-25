@@ -28,6 +28,6 @@ var module = (function([cf]){
 })([config]);
 
 // console.log(module);
-// module.method();
+console.log(module.method());
 
-// console.log(m1);
+console.log(m1);

@@ -1,12 +1,18 @@
 var gulp = require('gulp'),
     gulpJade = require('gulp-jade'),
     jade= require('jade'),
-    sass = require('gulp-sass'),
+    // sass = require('gulp-sass'),
     batch = require('gulp-batch'),
     autoprefixer = require('gulp-autoprefixer'),
     watch = require('gulp-watch'),
     concat = require('gulp-concat'),
-    csso = require('gulp-csso');
+    csso = require('gulp-csso'),
+    browserSync = require('browser-sync'),
+    reload = browserSync.reload,
+    historyFallback = require('connect-history-api-fallback');
+
+
+
 
 gulp.task('gulpJade',function(){
     return gulp.src('src/app/template/**/*.jade')
@@ -22,21 +28,21 @@ gulp.task('gulpJade',function(){
     .pipe(gulp.dest('src/build'))
 });
 
-gulp.task('sass', function(){
-    gulp.src('src/app/style/**/*.+(scss|sass)')
+// gulp.task('sass', function(){
+//     gulp.src('src/app/style/**/*.+(scss|sass)')
 
-    .pipe(sass({
-        includePaths: [
-            require('node-normalize-scss').includePaths,
-        ]}
-    ).on('error', sass.logError))
-    .pipe(autoprefixer({
-            browsers: ['last 50 versions'],
-            // cascade: false
-        }))
-    .pipe(concat('libs.css'))
-    .pipe(gulp.dest('src/build/css'))
-});
+//     .pipe(sass({
+//         includePaths: [
+//             require('node-normalize-scss').includePaths,
+//         ]}
+//     ).on('error', sass.logError))
+//     .pipe(autoprefixer({
+//             browsers: ['last 50 versions'],
+//             // cascade: false
+//         }))
+//     .pipe(concat('libs.css'))
+//     .pipe(gulp.dest('src/build/css'))
+// });
 
 gulp.task('minCss', function(){
     return gulp.src('src/build/css/libs.css')
@@ -73,15 +79,30 @@ gulp.task('watch', function(){
         gulp.start('scripts',done);
     }));
 
-    gulp.watch('src/app/style/**/*.+(scss|sass)', batch(function(events, done) {
-        gulp.start('sass', done);
-    }));
+    // gulp.watch('src/app/style/**/*.+(scss|sass)', batch(function(events, done) {
+    //     gulp.start('sass', done);
+    // }));
 
     gulp.watch('src/build/css/libs.css', batch(function(events, done) {
         gulp.start('minCss', done);
     }));
+    gulp.start('browserSync');
 });
+gulp.task('browserSync', function() {
+    browserSync({
+      server: {
+        baseDir: "./src/build/"
+      },
+      middleware: [
+        historyFallback()
+      ],
+      port: 4900,
+      open: true,
+      notify: false
+    });
+  });
 
-gulp.task('build', ['sass', 'minCss', 'gulpJade', 'scripts']);
+
+gulp.task('build', ['minCss', 'gulpJade', 'scripts']);
 
 gulp.task('default', ['watch']);
