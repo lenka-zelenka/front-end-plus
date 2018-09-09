@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <p>Select country</p>
+        <select v-model="selectedCountry">
+            <option 
+                v-for="(country, index) of counrryList" 
+                :value="index" 
+                :selected="index == 'ukr'"> 
+                {{index}}
+            </option>
+        </select>
+        Выбрано: {{ selectedCountry }}
+        <hr />
+
+        <p>Select country</p>
+        <select  v-model="selectedCity">
+            <option v-for="(city, index) of cityList[selectedCountry]" v-bind:value="index">{{ city }}</option>
+        </select>
+        Выбрано: {{ selectedCity }}
+    </div>
+
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
