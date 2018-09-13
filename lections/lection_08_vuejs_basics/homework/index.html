@@ -18,52 +18,22 @@
         crossorigin="anonymous"></script>
 </head>
 
+
 <body>
     <div class="container">
         <div class="row">
-            <div id="left" class="col-sm">
-                <ul>
-                    <li v-for="item in list" v-if="item">
-                        {{item}}
-                    </li>
-                </ul>
-                <button v-on:click="sendToRight" class="btn btn-primary"> Push to right </button>
-
-            </div>
-
-            <div id="right" class="col-sm">
-                <ul>
-                    <li v-for="item in list" v-if="item">
-                        {{item}}
-                    </li>
-                </ul>
-                <button v-on:click="sendToLeft" class="btn btn-primary">Push to left </button>
-
-            </div>
+            <button class="btn btn-primary" v-on:click="addRow">Add new row</button>
+            <button class="btn btn-danger" v-on:click="deleteRow">Delete row</button>
         </div>
-
-        <div id="popup" class="row">
-            <div class="col-xs-12">
-                <div v-if="step === 1" class="first-step">
-                    <input type="text" class="form-control" placeholder="name" v-model="userData.name">
-                    <input type="text" class="form-control" placeholder="email" v-model="userData.email">
-                </div>
-                <div v-if="step === 2" class="second-step">
-                    <input type="text" class="form-control" placeholder="city" v-model="userData.city">
-                </div>
-                <div v-if="step === 3">
-                    Congrats!!!
-                    <ul>
-                        <li v-for="item in userData">
-                            {{item.name}}
-                        </li>
-                        <li></li>
-                    </ul>
-                </div>
-                {{userData.name}}
-
-                <button v-on:click="raiseStep" class="btn btn-primary">NEXT</button>
-            </div>
+        <div class="row">
+            <table id="table" border="1">
+                <thead>
+                    <td v-for="(title, key) of tableContent[0]">{{ key}}</td>
+                </thead>
+                <tr v-for="item of tableContent">
+                    <td v-for="title of item">{{ title }}</td>
+                </tr>
+            </table>
         </div>
     </div>
     <script src="./main.js"></script>
