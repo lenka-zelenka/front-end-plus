@@ -9,36 +9,45 @@
 
 //     2) Каждую ячейку мы можем редактировать. При нажатии на ячейку - появляется popup с textarea и кнопка Apply.
 
-var emptyData = {
-    id: '',
-    title: '',
-    age: '',
-    adress: '',
-}
-var vm = new Vue({
-    el: '#table',
+
+var app = new Vue({
+    el: '#app',
     data: {
-        a: 1,
         tableContent: [{
+            id: 0,
+            title: 'Olena',
+            age: 16,
+            adress: 'sdfsdf',
+        }],
+        emptyData: {
             id: 0,
             title: '',
             age: '',
             adress: '',
-        }]
+        }
     },
     methods: {
+        fillData(){
+            this.emptyData
+            return this.emptyData;
+        },
         addRow: function () {
-            console.log('Added');
-            this.tableContent.push({
-                id: 0,
-                title: '',
-                age: '',
-                adress: '',
-            });
+            this.tableContent.push(this.fillData());
         },
         deleteRow() {
-            // this.tableContent.pop()
-            console.log('Deleted');
+            var result = false;
+            var lastItem = this.tableContent[this.tableContent.length -1];
+            for (const key in lastItem) {                
+                if (lastItem[key]) {
+                    result = confirm("Delete row?");
+                    break;
+                } else {
+                    result = true;
+                }
+            } 
+            if(result){
+                this.tableContent.pop()
+            }
         }
     }
 })
