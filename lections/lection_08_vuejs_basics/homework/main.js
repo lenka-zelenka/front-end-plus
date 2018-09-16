@@ -18,6 +18,7 @@ var emptyData = {
 var vm = new Vue({
     el: '#table',
     data: {
+        a: 1,
         tableContent: [{
             id: 0,
             title: '',
@@ -26,18 +27,18 @@ var vm = new Vue({
         }]
     },
     methods: {
-        addRow: function() { 
-            console.log('Deleted');
+        addRow: function () {
+            console.log('Added');
             this.tableContent.push({
                 id: 0,
                 title: '',
                 age: '',
                 adress: '',
-            })
+            });
         },
-        deleteRow() { 
+        deleteRow() {
             // this.tableContent.pop()
-            console.log('Deleted')
+            console.log('Deleted');
         }
     }
 })
