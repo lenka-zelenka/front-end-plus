@@ -1,7 +1,7 @@
 // # Практика
 //     1) Написать приложение, которое позволяет добавлять, удалять строки из таблицы. Данные хранить в model.
 
-//     В model создать таблицу с полями - id, title, age, adress.
+//     В model создать таблицу с полями - id, title, age, address.
 //     При добавлении строки - добавляется пустая строка.
 //     При удалении строки - удаляется, если пустая строка. 
 
@@ -13,22 +13,22 @@
 var app = new Vue({
     el: '#app',
     data: {
-        showInput: false,
+        editMode: false,
         tableContent: [{
             id: 0,
             title: 'Olena',
             age: 16,
-            adress: 'sdfsdf',
+            address: 'sdfsdf',
         }],
         emptyData: {
             id: 0,
             title: '',
             age: '',
-            adress: '',
+            address: '',
         }
     },
     methods: {
-        fillData(){
+        fillData() {
             this.emptyData.id = this.tableContent.length;
             return this.emptyData;
         },
@@ -36,21 +36,26 @@ var app = new Vue({
             this.tableContent.push(this.fillData());
             $('#exampleModal').modal('hide');
         },
-        edit(item, key) {
-            console.log(key)
+        toggleEditMode(el) {
+            console.log(el)
+            if (this.editMode) {
+                this.editMode = false;
+            } else {
+                this.editMode = true;
+            }
         },
         deleteRow() {
             var result = false;
-            var lastItem = this.tableContent[this.tableContent.length -1];
-            for (const key in lastItem) {                
+            var lastItem = this.tableContent[this.tableContent.length - 1];
+            for (const key in lastItem) {
                 if (lastItem[key]) {
                     result = confirm("Delete row?");
                     break;
                 } else {
                     result = true;
                 }
-            } 
-            if(result){
+            }
+            if (result) {
                 this.tableContent.pop()
             }
         }
@@ -58,4 +63,4 @@ var app = new Vue({
 })
 $(function () {
     $('[data-toggle="popover"]').popover()
-  })
+})
