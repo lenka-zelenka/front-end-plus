@@ -13,6 +13,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        showInput: false,
         tableContent: [{
             id: 0,
             title: 'Olena',
@@ -28,11 +29,15 @@ var app = new Vue({
     },
     methods: {
         fillData(){
-            this.emptyData
+            this.emptyData.id = this.tableContent.length;
             return this.emptyData;
         },
         addRow: function () {
             this.tableContent.push(this.fillData());
+            $('#exampleModal').modal('hide');
+        },
+        edit(item, key) {
+            console.log(key)
         },
         deleteRow() {
             var result = false;
@@ -51,3 +56,6 @@ var app = new Vue({
         }
     }
 })
+$(function () {
+    $('[data-toggle="popover"]').popover()
+  })

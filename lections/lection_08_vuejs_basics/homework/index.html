@@ -28,12 +28,16 @@
         <div class="row">
             <table border="1">
                 <thead>
-                    <td v-for="(title, key) of tableContent[0]">{{ key}}</td>
+                    <td v-for="(title, key) of tableContent[0]">{{key}}</td>
                 </thead>
                 <tr v-for="item of tableContent">
-                    <td v-for="title of item">{{ title }}</td>
+                    <td v-for="(value) of item">
+                        <p>{{ value }}</p>
+                        <input type="text" v-model="">
+                    </td>
                 </tr>
             </table>
+            <!-- <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button> -->
         </div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -47,7 +51,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <form>
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input id="title" type="text" v-model="emptyData.title">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input id="age" type="number" v-model="emptyData.age">
+                            </div>
+                            <div class="form-group">
+                                <label for="adress">Adress</label>
+                                <input id="adress" type="text" v-model="emptyData.adress">
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
