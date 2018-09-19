@@ -13,7 +13,8 @@
 var app = new Vue({
     el: '#app',
     data: {
-        editMode: false,
+        editMode: '',
+        editItem: null,
         tableContent: [{
             id: 0,
             title: 'Olena',
@@ -36,13 +37,17 @@ var app = new Vue({
             this.tableContent.push(this.fillData());
             $('#exampleModal').modal('hide');
         },
-        toggleEditMode(el) {
-            console.log(el)
-            if (this.editMode) {
-                this.editMode = false;
+        edit(item, key){
+            if(this.editItem) {
+                this.editItem = null;
             } else {
-                this.editMode = true;
+                this.editItem = item.id + key;
             }
+        }, 
+        showEdit(item, key){
+            // <!-- editItem == item.id + key && key !== 'id' -->
+
+            return this.editItem == item.id + key && key !== 'id';
         },
         deleteRow() {
             var result = false;

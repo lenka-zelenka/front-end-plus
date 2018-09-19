@@ -20,46 +20,45 @@
 
 
 <body>
+    <style>
+        td {
+            position: relative;
+        }
+        .edit-item {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            z-index: 2;
+        }
+    </style>
     <div id="app" class="container">
         <div class="row">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add new row</button>
-            <button class="btn btn-danger" v-on:click="deleteRow">Delete row</button>
+            <div class="col-sm-12">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add new row</button>
+                <button class="btn btn-danger" v-on:click="deleteRow">Delete row</button>
+            </div>
         </div>
         <div class="row">
-            <table border="1">
-                <thead>
-                    <td v-for="(title, key) of tableContent[0]">{{key}}</td>
-                </thead>
-                <tr v-for="item of tableContent">
-                    <!-- <td v-for="(value, key) of item" v-on:click="editItem(value, key)" >
-                        <p>{{ value}} {{ key }}</p>
-                        <input type="text" name="" id="" >
-                    </td> -->
-                    <td>
-                        <p v-on:click="toggleEditMode">{{ item.id }}</p>
-                        <div v-if="editMode" class="edit-item">
-                            <input type="text" v-model="item.id">
-                        </div>
-                    </td>
-                    <td>
-                        <p v-on:click="toggleEditMode"> {{ item.title }} </p>
-                        <div v-if="editMode" class="edit-item">
-                            <input type="text" v-model="item.title">
-                        </div>
-                    </td>
-                    <td>
-                        <p v-on:click="toggleEditMode">{{ item.age }} </p>
-                        <div v-if="editMode" class="edit-item">
-                            <input type="text" v-model="item.age">
-                        </div>
-                    </td>
-                    <td> {{ item.address }} </td>
-                </tr>
-            </table>
-            <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title"
-                data-content=>Click to toggle popover</button>
+            <div class="col-sm-12">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <td v-for="(title, key) of tableContent[0]" scope="col">{{key}}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item of tableContent">
+                        <td v-for="(value, key) of item" v-on:click="edit(item, key)">
+                            <p>{{ value}} </p>
+                            <div v-if="showEdit(item, key)" class="edit-item alert alert-dark">
+                                <input v-model="item[key]" v-bind:type="key == 'age' ? 'number' : 'text'" name="" id="">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
         </div>
-        <div id="popover-content">some comtemt</div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
