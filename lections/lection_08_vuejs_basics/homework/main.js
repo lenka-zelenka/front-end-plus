@@ -20,6 +20,12 @@ var app = new Vue({
             title: 'Olena',
             age: 16,
             address: 'sdfsdf',
+        },
+        {
+            id: 1,
+            title: 'Ivan',
+            age: 35,
+            address: 'tt tt tt tt tt t',
         }],
         emptyData: {
             id: 0,
@@ -38,16 +44,12 @@ var app = new Vue({
             $('#exampleModal').modal('hide');
         },
         edit(item, key){
+            console.log()
             if(this.editItem) {
                 this.editItem = null;
-            } else {
-                this.editItem = item.id + key;
             }
-        }, 
-        showEdit(item, key){
-            // <!-- editItem == item.id + key && key !== 'id' -->
+            this.editItem = item.id + key;
 
-            return this.editItem == item.id + key && key !== 'id';
         },
         deleteRow() {
             var result = false;

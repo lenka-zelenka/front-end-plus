@@ -47,15 +47,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item of tableContent">
-                        <td v-for="(value, key) of item" v-on:click="edit(item, key)">
-                            <p>{{ value}} </p>
-                            <div v-if="showEdit(item, key)" class="edit-item alert alert-dark">
-                                <input v-model="item[key]" v-bind:type="key == 'age' ? 'number' : 'text'" name="" id="">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                        <tr v-for="item of tableContent">
+                            <td v-for="(value, key) of item" v-on:click="edit(item, key)">
+                                <p>{{ value}}</p>
+                                <div v-if="editItem == item.id + key && key !== 'id'" class="edit-item alert alert-dark">
+                                    <input v-model="item[key]" v-bind:type="key == 'age' ? 'number' : 'text'">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
