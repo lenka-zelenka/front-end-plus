@@ -1,5 +1,5 @@
 <template>
-    <p>my first component{{msg}} </p>
+    <p>my first component {{msg}} </p>
 </template>
 
 <script>
