@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/lenka-zelenka/front-end-plus/issues"
   },
-  "homepage": "https://github.com/lenka-zelenka/front-end-plus#readme"
+  "homepage": "https://github.com/lenka-zelenka/front-end-plus#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.3"
+  }
 }

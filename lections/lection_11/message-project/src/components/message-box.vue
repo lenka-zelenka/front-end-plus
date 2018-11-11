@@ -4,7 +4,8 @@
             :key="index" 
             class="alert"
             v-bind:class="messageClass(item.type)">
-            {{item.text}}
+            {{item.text}}, 
+            {{item.id}}
         </div>
     </div>
     
@@ -17,7 +18,9 @@ export default {
   data: function() {
     return {
       list: [],
-      counter: 0
+      counter: 0,
+      error: [],
+      other: []
     };
   },
   methods: {
@@ -36,11 +39,20 @@ export default {
     message: {
       deep: true,
       handler: function(newData, oldData) {
-        this.list.unshift({
-          text: newData.text,
-          type: newData.type,
-          id: ++this.counter
-        });
+        if (newData.type == "danger") {
+          this.error.unshift({
+            text: newData.text,
+            type: newData.type,
+            id: ++this.counter
+          });
+        } else {
+          this.other.unshift({
+            text: newData.text,
+            type: newData.type,
+            id: ++this.counter
+          });
+        }
+        this.list = this.error.concat(this.other);
         this.$nextTick(() => {
           setTimeout(this.changeStatus, 5000, this.counter);
         });
@@ -49,7 +61,9 @@ export default {
   },
   mounted: function() {
     setInterval(() => {
-      this.list = this.list.filter(item => (item.status != "removed"));
+      this.list = this.list.filter(item => item.status != "removed");
+      this.other = [];
+      this.error = [];
     }, 2000);
   }
 };
